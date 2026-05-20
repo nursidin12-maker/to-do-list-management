@@ -1,0 +1,36 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Task;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * Task Model Factory
+ *
+ * Used for seeding and testing.
+ * Compatible with Laravel 13 / PHP 8.3+.
+ *
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
+ */
+class TaskFactory extends Factory
+{
+    /**
+     * The model the factory corresponds to.
+     */
+    protected $model = Task::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'title'        => $this->faker->sentence(4),
+            'description'  => $this->faker->optional()->paragraph(),
+            'is_completed' => $this->faker->boolean(20), // 20% chance completed
+        ];
+    }
+}
