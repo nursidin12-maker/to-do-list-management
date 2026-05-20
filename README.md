@@ -21,31 +21,97 @@ Aplikasi full-stack **Todo List Management** yang dibangun dengan **Laravel 13**
 
 ```
 to-do-list-management/
-├── backend/          # Laravel 13 REST API
-│   ├── app/
-│   │   ├── Http/
-│   │   │   ├── Controllers/TaskController.php
-│   │   │   └── Requests/
-│   │   │       ├── StoreTaskRequest.php
-│   │   │       └── UpdateTaskRequest.php
-│   │   └── Models/Task.php
-│   ├── database/migrations/
-│   │   └── ..._create_tasks_table.php
-│   ├── routes/api.php
-│   └── config/cors.php
 │
-└── frontend/         # React + TypeScript (Vite)
+├── .gitignore
+├── README.md
+│
+├── backend/                                ← Laravel 13 REST API
+│   ├── artisan                             ← CLI entry point
+│   ├── composer.json                       ← PHP dependencies
+│   ├── .env.example                        ← Environment template
+│   │
+│   ├── app/
+│   │   ├── Exceptions/
+│   │   │   └── Handler.php                 ← Global exception handler
+│   │   ├── Http/
+│   │   │   ├── Controllers/
+│   │   │   │   ├── Controller.php          ← Base controller
+│   │   │   │   └── TaskController.php      ← CRUD endpoints
+│   │   │   └── Requests/
+│   │   │       ├── StoreTaskRequest.php    ← Create validation
+│   │   │       └── UpdateTaskRequest.php   ← Update validation
+│   │   ├── Models/
+│   │   │   └── Task.php                    ← Eloquent model
+│   │   └── Providers/
+│   │       └── AppServiceProvider.php      ← Service provider
+│   │
+│   ├── bootstrap/
+│   │   ├── app.php                         ← Application kernel
+│   │   ├── providers.php                   ← Provider registration
+│   │   └── cache/                          ← Runtime cache (git-ignored)
+│   │       └── .gitignore
+│   │
+│   ├── config/
+│   │   ├── app.php                         ← App settings
+│   │   ├── cache.php                       ← Cache config
+│   │   ├── cors.php                        ← CORS config
+│   │   ├── database.php                    ← DB connections
+│   │   ├── filesystems.php                 ← Storage disks
+│   │   └── logging.php                     ← Log channels
+│   │
+│   ├── database/
+│   │   ├── factories/
+│   │   │   └── TaskFactory.php             ← Test data factory
+│   │   ├── migrations/
+│   │   │   └── 2024_01_01_..._tasks.php    ← Tasks table schema
+│   │   └── seeders/
+│   │       └── DatabaseSeeder.php          ← DB seeder
+│   │
+│   ├── public/
+│   │   └── index.php                       ← HTTP entry point
+│   │
+│   ├── routes/
+│   │   ├── api.php                         ← API routes (/api/*)
+│   │   ├── console.php                     ← Scheduled commands
+│   │   └── web.php                         ← Web routes
+│   │
+│   └── storage/
+│       ├── app/
+│       │   ├── private/                    ← Private uploads
+│       │   └── public/                     ← Public uploads
+│       ├── framework/
+│       │   ├── cache/data/                 ← File cache
+│       │   ├── sessions/                   ← Session files
+│       │   └── views/                      ← Compiled views
+│       └── logs/                           ← Application logs
+│
+└── frontend/                               ← React + TypeScript + Vite
+    ├── index.html                          ← HTML entry point
+    ├── package.json                        ← JS dependencies
+    ├── tsconfig.json                       ← TypeScript config
+    ├── tsconfig.node.json                  ← TS config for Vite
+    ├── vite.config.ts                      ← Vite + proxy config
+    │
     └── src/
+        ├── App.tsx                         ← Root component
+        ├── main.tsx                        ← React entry point
+        ├── styles.css                      ← Global styles
+        │
         ├── components/
-        │   ├── AddTaskForm.tsx
-        │   ├── TaskList.tsx
-        │   ├── TaskItem.tsx
-        │   ├── EditTaskModal.tsx
-        │   └── ToastContainer.tsx
-        ├── hooks/useToast.ts
-        ├── services/taskService.ts
-        ├── types/index.ts
-        └── App.tsx
+        │   ├── AddTaskForm.tsx             ← Create task form
+        │   ├── EditTaskModal.tsx           ← Edit task modal
+        │   ├── TaskItem.tsx                ← Single task row
+        │   ├── TaskList.tsx                ← Task list + filters
+        │   └── ToastContainer.tsx          ← Notifications
+        │
+        ├── hooks/
+        │   └── useToast.ts                 ← Toast state hook
+        │
+        ├── services/
+        │   └── taskService.ts              ← Axios API calls
+        │
+        └── types/
+            └── index.ts                    ← TypeScript interfaces
 ```
 
 ---
@@ -63,7 +129,7 @@ to-do-list-management/
 
 ```bash
 git clone https://github.com/nursidin12-maker/to-do-list-management.git
-cd todo-app
+cd to-do-list-management
 ```
 
 ---
